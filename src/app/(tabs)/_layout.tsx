@@ -1,6 +1,6 @@
-import { Tabs } from 'expo-router';
-import { useUnistyles } from 'react-native-unistyles';
-import { TabBarIcon } from '@/components/TabBarIcon';
+import { TabBarIcon } from "@/components/TabBarIcon";
+import { Tabs } from "expo-router";
+import { useUnistyles } from "react-native-unistyles";
 
 export default function TabLayout() {
   const { theme } = useUnistyles();
@@ -23,15 +23,24 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <TabBarIcon name="compass" color={color} />,
+          title: "Explore",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="compass" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="persons"
+        options={{
+          title: "Persons",
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
       />
     </Tabs>
