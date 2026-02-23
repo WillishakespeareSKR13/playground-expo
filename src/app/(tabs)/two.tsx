@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native-unistyles';
 import { useState } from 'react';
 import { startRecording, stopRecording, playSound } from '@/services/audio';
 import type { Audio } from 'expo-av';
+import { RecordButton } from '@/components/RecordButton';
 
 export default function ExploreScreen() {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
@@ -35,14 +36,7 @@ export default function ExploreScreen() {
       <Text style={styles.title}>Audio</Text>
       <Text style={styles.subtitle}>Record and play audio</Text>
 
-      <Pressable
-        style={[styles.recordButton, isRecording && styles.recordingActive]}
-        onPress={handleRecord}
-      >
-        <Text style={styles.recordButtonText}>
-          {isRecording ? 'Stop' : 'Record'}
-        </Text>
-      </Pressable>
+      <RecordButton isRecording={isRecording} onPress={handleRecord} />
 
       {recordingUri && (
         <Pressable style={styles.playButton} onPress={handlePlay}>
@@ -70,23 +64,6 @@ const styles = StyleSheet.create((theme) => ({
     ...theme.typography.body,
     color: theme.colors.textSecondary,
     marginBottom: theme.spacing.xl,
-  },
-  recordButton: {
-    width: 100,
-    height: 100,
-    borderRadius: theme.borderRadius.full,
-    backgroundColor: theme.colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.lg,
-  },
-  recordingActive: {
-    backgroundColor: theme.colors.error,
-  },
-  recordButtonText: {
-    ...theme.typography.body,
-    color: '#FFFFFF',
-    fontWeight: '600',
   },
   playButton: {
     paddingHorizontal: theme.spacing.lg,

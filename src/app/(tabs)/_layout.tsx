@@ -1,14 +1,6 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { useUnistyles } from 'react-native-unistyles';
-
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
-}
+import { TabBarIcon } from '@/components/TabBarIcon';
 
 export default function TabLayout() {
   const { theme } = useUnistyles();
@@ -39,9 +31,7 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="compass" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="compass" color={color} />,
         }}
       />
     </Tabs>

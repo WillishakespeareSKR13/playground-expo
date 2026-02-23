@@ -1,40 +1,22 @@
 import { View, Text, Pressable } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
 import { useThemeToggle } from '@/hooks/useThemeToggle';
 import { useAppStore } from '@/store/zustand';
+import { CounterCard } from '@/components/CounterCard';
 
 export default function HomeScreen() {
   const { theme, toggle } = useThemeToggle();
   const { count, increment, decrement } = useAppStore();
-  const scale = useSharedValue(1);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-  }));
-
-  const handlePress = () => {
-    scale.value = withSpring(1.2, {}, () => {
-      scale.value = withSpring(1);
-    });
-    increment();
-  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tech Test</Text>
       <Text style={styles.subtitle}>Everything is ready</Text>
 
-      <Animated.View style={[styles.counterCard, animatedStyle]}>
-        <Text style={styles.counterText}>{count}</Text>
-      </Animated.View>
+      <CounterCard count={count} onPress={increment} />
 
       <View style={styles.row}>
-        <Pressable style={styles.button} onPress={handlePress}>
+        <Pressable style={styles.button} onPress={increment}>
           <Text style={styles.buttonText}>+</Text>
         </Pressable>
         <Pressable style={styles.button} onPress={decrement}>
@@ -68,19 +50,6 @@ const styles = StyleSheet.create((theme) => ({
     ...theme.typography.body,
     color: theme.colors.textSecondary,
     marginBottom: theme.spacing.xl,
-  },
-  counterCard: {
-    width: 120,
-    height: 120,
-    borderRadius: theme.borderRadius.xl,
-    backgroundColor: theme.colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing.lg,
-  },
-  counterText: {
-    ...theme.typography.h1,
-    color: '#FFFFFF',
   },
   row: {
     flexDirection: 'row',
