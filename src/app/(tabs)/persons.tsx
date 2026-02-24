@@ -1,28 +1,25 @@
 import { PersonList } from "@/components/persons/List";
 import { usePersons } from "@/hooks/usePersons";
-import { Person } from "@/types/Person";
+import { useRouter } from "expo-router";
 import { Text, TouchableHighlight, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 const ScreenPersons = () => {
-  const { persons, add } = usePersons();
+  const router = useRouter();
+  const { persons } = usePersons();
 
   const handleAddPerson = () => {
-    const MOCK_PERSON: Person = {
-      id: Date.now(),
-      first_name: "John",
-      last_name: "Doe",
-      age: 30,
-    };
-    add(MOCK_PERSON);
+    router.push("/create");
   };
 
   return (
     <View style={styles.container}>
       <PersonList persons={persons} />
-      <TouchableHighlight onPress={handleAddPerson} style={styles.button}>
-        <Text style={styles.button_text}>Add Person</Text>
-      </TouchableHighlight>
+      <View style={styles.footer}>
+        <TouchableHighlight onPress={handleAddPerson} style={styles.button}>
+          <Text style={styles.button_text}>Add Person</Text>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 };
@@ -30,19 +27,30 @@ const ScreenPersons = () => {
 const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: theme.colors.card,
+  },
+  footer: {
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: theme.colors.background,
-    padding: theme.spacing.lg,
+    padding: theme.spacing.md,
   },
   button: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: theme.colors.primary,
-    padding: theme.spacing.sm,
-    borderRadius: 8,
+    padding: theme.spacing.md,
+    borderRadius: 32,
   },
   button_text: {
-    color: theme.colors.primary,
+    color: theme.colors.text,
     fontSize: theme.typography.body.fontSize,
+    fontWeight: "bold",
   },
 }));
 

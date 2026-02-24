@@ -1,5 +1,4 @@
 import { AppProviders } from "@/providers";
-import "@/theme/unistyles";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -39,7 +38,10 @@ export default function RootLayout() {
     <AppProviders>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="create" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="create"
+          options={{ headerShown: false, presentation: "modal" }}
+        />
       </Stack>
     </AppProviders>
   );

@@ -9,14 +9,14 @@ export const usePersons = () => {
 export const usePerson = () => {
   const store = usePersonStore();
 
-  const dirty = useMemo(() => {
+  const completed = useMemo(() => {
     if (!store.person) return false;
-    const isDirty =
-      store.person.first_name !== "" ||
-      store.person.last_name !== "" ||
+    const isCompleted =
+      store.person.first_name !== "" &&
+      store.person.last_name !== "" &&
       store.person.age !== 0;
-    return isDirty;
+    return isCompleted;
   }, [JSON.stringify(store.person)]);
 
-  return { ...store, dirty };
+  return { ...store, completed };
 };

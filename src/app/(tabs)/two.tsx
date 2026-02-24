@@ -1,9 +1,9 @@
-import { View, Text, Pressable } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
-import { useState } from 'react';
-import { startRecording, stopRecording, playSound } from '@/services/audio';
-import type { Audio } from 'expo-av';
-import { RecordButton } from '@/components/RecordButton';
+import { RecordButton } from "@/components/RecordButton";
+import { playSound, startRecording, stopRecording } from "@/services/audio";
+import type { Audio } from "expo-av";
+import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import { StyleSheet } from "react-native-unistyles";
 
 export default function ExploreScreen() {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
@@ -50,8 +50,8 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: theme.colors.background,
     padding: theme.spacing.lg,
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   playButtonText: {
     ...theme.typography.body,
-    color: '#FFFFFF',
-    fontWeight: '600',
+    color: "#FFFFFF",
+    fontWeight: "600",
   },
 }));
